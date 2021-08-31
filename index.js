@@ -3,7 +3,7 @@ let notificationField = document.querySelector('#notification');
 
 const BC_COOKIE_AMOUNT = 'cookieAmount';
 
-let loaded = getBrowserCookie(BC_COOKIE_AMOUNT);
+let loaded = parseInt(getBrowserCookie(BC_COOKIE_AMOUNT));
 cookieNumber = Number.isFinite(loaded) ? loaded : 0;
 updateCookieTracker();
 
