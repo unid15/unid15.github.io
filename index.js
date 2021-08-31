@@ -31,6 +31,13 @@ function saveBrowserCookie(cookieName, cookieValue) {
 function getBrowserCookie(cookieName) {
 	let name = cookieName + "=";
 	let decodedBrowserCookie = decodeURIComponent(document.cookie);
-	let ca = decodedBrowserCookie.split(';');
-	console.log(ca);
+	let browserCookieArray = decodedBrowserCookie.split(';');
+	console.log(browserCookieArray);
+	
+	const cookie = browserCookieArray.find(value => {
+		return value.split('=')[0].trim() === cookieName;
+	});
+	
+	console.log(`Found ${cookie}`);
+	return cookie.split('=')[1];
 }
