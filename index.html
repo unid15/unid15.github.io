@@ -1,21 +1,104 @@
 <html>
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
-    <title>Nikita's homepage</title>
+	<meta charset="utf-8">
+	<title>Nikita's homepage</title>
+	<link rel="stylesheet" href="index.css">
+	<style>
+		body {
+			background-color: EAE3E5;
+		}
+		.container {
+			font-family: arial;
+			font-size: 16px;
+			margin: 25px;
+		}
+		.homework {
+			display: none;
+		}
+		header {
+			background-color: D3CCCE;
+		}
+	</style>
   </head>
   <body>
-    <b>Hello there!
-    </b><br>
+	<header>
+	<div align="center">
+		<h1>Matematika 2022/2023</h1>
+		<h2>Nikita Golmgren</h2>
+	</div>
+	<br>
+	<div align="center">
+	<button onclick="switchCz()" id="set-ru"><img src="icons/cz.png" \> cz</button> | <button onclick="switchRu()" id="set-cz"><img src="icons/ru.png" \> ru</button> | <button onclick="switchEn()" id="set-en"><img src="icons/en.png" \> en</button>
+	</div>
+	</header>
 	
-    Why don't you <button type="button" onclick="cookieButton()">Get a cookie</button>?
-    
-    <br>
-    <div id="notification">
-      Go ahead!
+	<div class="container">
+		<h4>
+		<p lang="ru">Контакт</p>
+		<p lang="cz">Kontakt</p>
+		<p lang="en">Contacts</p>
+		</h4>
+		<ul>
+			<li><img src="icons/email.png" \> Email: <a href="mailto:nikita.golmgren@gmail.com" \>nikita.golmgren@gmail.com</a></li>
+			<li><img src="icons/telegram.png" \> Telegram: <a href="https://t.me/nikita_g15">nikita_g15</a></li>
+		</ul>
+	</div>
+	
+	<div class="container">
+		<h4>
+		<p lang="ru">Переводы вступительных экзаменов на русский язык</p>
+		<p lang="cz">Překlady přijímacích zkoušek do ruštiny</p>
+		<p lang="en">Entrance exams translated into russian language</p>
+		</h4>
+		<ul>
+			<li><img src="icons/pdf.png" \> <a href="files/2019-termin-1.pdf">2019-01</a> | <a href="files/2019-termin-2.pdf">2019-02</a> | <a href="files/2020-ukazkovy.pdf">2020-00</a> | <a href="files/2020-termin-1.pdf">2020-01</a> | <a href="files/2020-termin-2.pdf">2020-02</a>
+			<li><img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" \> <a href="https://drive.google.com/drive/u/0/folders/1JClhR1yp-7CuPuJBXB76lXQo5QAgEXk1">Google Drive</a></li>
+		</ul>
     </div>
+	
+	<div class="homework">
+		<h4>
+		<p lang="ru">Домашние задания</p>
+		<p lang="cz">Domácí úlohy</p>
+		<p lang="en">Homework</p>
+		</h4>
+		<ul>
+			
+		</ul>
+	</div>
+	
+	<hr \>
+	
+	
     
     <footer>
     </footer>
   </body>
-  <script src="index.js"></script>
+  <script>
+	function switchRu() {
+		setLanguage("ru");
+	}
+
+	function switchCz() {
+		setLanguage("cz");
+	}
+
+	function switchEn() {
+		setLanguage("en");
+	}
+
+	function setLanguage(language) {
+		console.log(language);
+		var elements = document.getElementsByTagName('p');
+		for( var i = 0 ; i < elements.length ; i++ ) {
+			if( elements[i].lang == language ) {
+				elements[i].style.display = 'block';
+			} else {
+				elements[i].style.display = 'none';
+			}
+		}
+	}
+	
+	switchRu();
+  </script>
 </html>
