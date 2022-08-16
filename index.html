@@ -30,6 +30,9 @@
 		<h2>Nikita Golmgren</h2>
 		<div class="saul">
 			<img src="files/saul.gif" \>
+			<audio id="saul">
+				<source src="files/saul.mp3" type="audio/mpeg">
+			</audio>
 		</div>
 	</div>
 	<br>
@@ -141,8 +144,8 @@
 		}
 	}
 	function saulGoodman() {
-		var saul = document.getElementsByClassName('saul')[0];
-		saul.style.display = 'block';
+		document.getElementsByClassName('saul')[0].style.display = 'block';
+		document.getElementById('saul').play();
 	}
 	
 	switchRu();
