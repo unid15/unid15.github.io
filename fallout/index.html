@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+  <title>Fallout Character Randomizer</title>
+  <script type="text/javascript" src="interface.js"></script>
+  <script type="text/javascript" src="logic.js"></script>
+  
+  
+  <style>
+  
+	.attribute {
+		margin-right: 5px;
+	}
+  
+  </style>
+  
+</head>
+<body>
+
+<div class="m-4 shadow">
+	<div class="row d-flex justify-content-center align-items-center">
+		<h1>Fallout NV Character Generator</h1>
+	</div>
+	
+	<div class="row">
+		<div class="col-4">
+			<div class="row">
+				<h2>S.P.E.C.I.A.L.</h2>
+			</div>
+			<div class="d-flex" id="attr_strength">
+				<span class="attribute">Strength: </span><span class="val">1</span>
+			</div>
+			<div class="d-flex" id="attr_perception">
+				<span class="attribute">Perception: </span><span class="val">1</span>
+			</div>
+			<div class="d-flex" id="attr_endurance">
+				<span class="attribute">Endurance: </span><span class="val">1</span>
+			</div>
+			<div class="d-flex" id="attr_charisma">
+				<span class="attribute">Charisma: </span><span class="val">1</span>
+			</div>
+			<div class="d-flex" id="attr_intelligence">
+				<span class="attribute">Intelligence: </span><span class="val">1</span>
+			</div>
+			<div class="d-flex" id="attr_agility">
+				<span class="attribute">Agility: </span><span class="val">1</span>
+			</div>
+			<div class="d-flex" id="attr_luck">
+				<span class="attribute">Luck: </span><span class="val">1</span>
+			</div>
+			
+		</div>
+		
+		<div class="col-8">
+		
+			<div class="row">
+				<div class="row">
+					<h2>Traits</h2>
+				</div>
+				<div class="row">
+					<span id="trait_amount">Picked 0 traits</span>
+				</div>
+				<div class="row">
+					<ul id="trait_list">
+					
+					</ul>
+				</div>
+			</div>
+		
+			<div class="row">
+				<div class="row">
+					<h2>Tagged skills</h2>
+				</div>
+				<div class="row">
+					<ul id="skill_list">
+					
+					</ul>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>
