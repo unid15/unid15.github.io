@@ -2,12 +2,6 @@ function randomInteger(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const GAME_FALLOUT = 1 << 0;
-const GAME_FALLOUT_2 = 1 << 1;
-const GAME_FALLOUT_TACTICS = 1 << 2;
-const GAME_FALLOUT_NEW_VEGAS = 1 << 3;
-const GAME_ALL = GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_NEW_VEGAS | GAME_FALLOUT_TACTICS;
-
 Array.prototype.pick = function() {
 	return this[Math.floor((Math.random()*this.length))];
 }
@@ -39,70 +33,94 @@ class TraitSet {
 }
 
 class Game {
-	constructor(name, skills, traits) {
+	constructor(name, directory, skills, traits) {
 		this.name = name;
+		this.directory = directory;
 		this.skills = skills;
 		this.traits = traits;
+		this.traits.forEach( (trait) => trait.game = this );
+		this.skills.forEach( (skill) => skill.game = this );
 	}
 }
 
-let newVegas = new Game("Fallout New Vegas",
+class PlayerAttribute {
+	constructor(name, imageURL) {
+		this.name = name;
+		this.imageURL = imageURL;
+	}
+	
+	getImage() {
+		let img = document.createElement("img");
+		img.style = "max-height: 100px;"
+		img.src = this.getImageURL();
+		return img;
+	}
+	
+	getDOM() {
+		let div = document.createElement("div");
+		div.classList.add("row", "d-flex");
+		let col1 = document.createElement("div");
+		col1.classList.add("col-auto");
+		let col2 = document.createElement("div");
+		col2.classList.add("col");
+		div.appendChild(col1);
+		div.appendChild(col2);
+		
+		col1.appendChild(this.getImage());
+		let name = document.createElement("span");
+		name.innerText = this.name;
+		col2.appendChild(name);
+		return div;
+	}
+}
+
+class Skill extends PlayerAttribute {
+	getImageURL() {
+		return "images/"+this.game.directory+"/skills/"+this.imageURL;
+	}
+}
+
+class Trait extends PlayerAttribute {
+	getImageURL() {
+		return "images/"+this.game.directory+"/traits/"+this.imageURL;
+	}
+}
+
+let newVegas = new Game("Fallout New Vegas", "nv",
 	[
-		"Barter", "Energy Weapons", "Explosives", "Guns", "Lockpick", "Medicine",
-		"Melee Weapons", "Repair", "Science", "Sneak", "Speech", "Survival", "Unarmed"
+		new Skill("Barter", "Barter.webp"),
+		new Skill("Energy Weapons", "EnergyWeapons.webp"),
+		new Skill("Explosives", "Explosives.webp"),
+		new Skill("Guns", "Guns.webp"),
+		new Skill("Lockpick", "Lockpick.webp"),
+		new Skill("Medicine", "Medicine.webp"),
+		new Skill("Melee Weapons", "MeleeWeapons.webp"),
+		new Skill("Repair", "Repair.webp"),
+		new Skill("Science", "Science.webp"),
+		new Skill("Sneak", "Sneak.webp"),
+		new Skill("Speech", "Speech.webp"),
+		new Skill("Survival", "Survival.webp"),
+		new Skill("Unarmed", "Unarmed.webp"),
 	],
 	[
-		"Built to Destroy", "Fast Shot", "Four Eyes", "Good Natured",
-		"Heavy Handed", "Kamikaze", "Loose Cannon", "Small Frame",
-		"Trigger Discripline", "Wild Wasteland", "Claustrophobia",
-		"Early Bird", "Logan's Loophole", "Hoarder", "Hot Blooded",
-		"Skilled"
+		new Trait("Built to Destroy", "BuiltToDestroy.webp"),
+		new Trait("Fast Shot", "FastShot.webp"),
+		new Trait("Four Eyes", "FourEyes.webp"),
+		new Trait("Good Natured", "GoodNatured.webp"),
+		new Trait("Heavy Handed", "HeavyHanded.webp"),
+		new Trait("Kamikaze", "Kamikaze.webp"),
+		new Trait("Loose Cannon", "LooseCannon.webp"),
+		new Trait("Small Frame", "SmallFrame.webp"),
+		new Trait("Trigger Discripline", "TriggerDiscipline.webp"),
+		new Trait("Wild Wasteland", "WildWasteland.webp"),
+		new Trait("Claustrophobia", "Claustrophobia.webp"),
+		new Trait("Early Bird", "EarlyBird.webp"),
+		new Trait("Logan's Loophole", "LogansLoophole.webp"),
+		new Trait("Hoarder", "Hoarder.webp"),
+		new Trait("Hot Blooded", "HotBlooded.webp"),
+		new Trait("Skilled", "Skilled.webp")
 	]
 )
-
-class Trait {
-	static list = [];
-	
-	static getTraitsForGame(game) {
-		return Trait.list.filter( trait => trait.games & game );
-	}
-	
-	constructor(name, games) {
-		this.name = name;
-		this.games = games;
-		Trait.list.push(this);
-	}
-}
-
-new Trait("Bloody Mess", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Bruiser", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Built to Destroy", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Chem Reliant", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Chem Resistant / Clean Living", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Educated", null);
-new Trait("Fast / Increased Metabolism", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Fast Shot", GAME_ALL);
-new Trait("Finesse", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Four Eyes", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Gifted", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Good Natured", GAME_ALL);
-new Trait("Heavy Handed", GAME_ALL);
-new Trait("Jinxed", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Kamikaze", GAME_ALL);
-new Trait("Loose Cannon", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Night Person", GAME_FALLOUT | GAME_FALLOUT_TACTICS);
-new Trait("One Hander", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Sex Appeal", GAME_FALLOUT_2);
-new Trait("Skilled", GAME_FALLOUT | GAME_FALLOUT_2 | GAME_FALLOUT_TACTICS);
-new Trait("Small Frame", GAME_ALL);
-new Trait("Trigger Discipline", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Wild Wasteland", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Claustrophobia", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Early Bird", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Hoarder", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Hot Blooded", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Logan's Loophole", GAME_FALLOUT_NEW_VEGAS);
-new Trait("Skilled", GAME_FALLOUT_NEW_VEGAS);
 
 class CharacterSheet {
 	static getAttributeList() {
@@ -130,12 +148,12 @@ class CharacterSheet {
 		}
 		
 		this.traits.forEach(
-			(traitText) => Interface.appendElementToList(traitText, Interface.getTraitList())
+			(trait) => Interface.appendElementToList(trait.getDOM(), Interface.getTraitList())
 		)
-		Interface.setValue("Picked " + this.traits.length + " traits", "#trait_amount");
+		//Interface.setValue("Picked " + this.traits.length + " traits", "#trait_amount");
 		
 		this.skills.forEach(
-			(skillText) => Interface.appendElementToList(skillText, Interface.getSkillList())
+			(skill) => Interface.appendElementToList(skill.getDOM(), Interface.getSkillList())
 		)
 	}
 	
@@ -152,20 +170,21 @@ class CharacterSheet {
 		let acceptableTraits = this.game.traits;
 		let traitAmount = randomInteger(0, 2);
 		this.traits = acceptableTraits.pickAmount(traitAmount);
-		console.log(this.traits);
 		
 	}
 	
 	generateTagSkills() {
 		let acceptableSkills = this.game.skills;
 		let tagAmount = 3;
+		console.log(acceptableSkills);
 		this.skills = acceptableSkills.pickAmount(tagAmount);
-		console.log(this.skills);
 	}
 }
 
-document.addEventListener("DOMContentLoaded", function(event){
+document.addEventListener("DOMContentLoaded", generateCharacter);
+
+function generateCharacter() {
+	Interface.resetLists();
 	let a = new CharacterSheet(newVegas);
 	a.randomize();
-	console.log(a.attributes);
-});
+}

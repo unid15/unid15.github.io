@@ -12,6 +12,10 @@
   
 	.attribute {
 		margin-right: 5px;
+		font-size: 1.2rem;
+	}
+	.val {
+		font-size: 1.25rem;
 	}
   
   </style>
@@ -21,11 +25,16 @@
 
 <div class="m-4 shadow">
 	<div class="row d-flex justify-content-center align-items-center">
+		<div class="row">
 		<h1>Fallout NV Character Generator</h1>
+		</div>
+		<div class="col">
+		<button class="btn btn-info" onclick="generateCharacter()">Generate again</button>
+		</div>
 	</div>
 	
-	<div class="row">
-		<div class="col-4">
+	<div class="row d-flex">
+		<div class="col-2 mx-4">
 			<div class="row">
 				<h2>S.P.E.C.I.A.L.</h2>
 			</div>
@@ -53,21 +62,7 @@
 			
 		</div>
 		
-		<div class="col-8">
-		
-			<div class="row">
-				<div class="row">
-					<h2>Traits</h2>
-				</div>
-				<div class="row">
-					<span id="trait_amount">Picked 0 traits</span>
-				</div>
-				<div class="row">
-					<ul id="trait_list">
-					
-					</ul>
-				</div>
-			</div>
+		<div class="col-4 mx-4">
 		
 			<div class="row">
 				<div class="row">
@@ -80,6 +75,24 @@
 				</div>
 			</div>
 		
+		</div>
+		
+		<div class="col-4 mx-4">
+		
+			<div class="row">
+				<div class="row">
+					<h2>Traits</h2>
+				</div>
+				<div class="row">
+					<span id="trait_amount"></span>
+				</div>
+				<div class="row">
+					<ul id="trait_list">
+					
+					</ul>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 </div>
